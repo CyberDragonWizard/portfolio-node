@@ -10,8 +10,8 @@ app.use("/", router);
 app.listen(5000, () => console.log("Server Running"));
 
 const contactEmail = nodemailer.createTransport({
-  host: "imap.gmail.com",
-  port: 993,
+  host: "smtp.gmail.com",
+  port: 465,
   auth: {
     user: "briand.nester@gmail.com",
     pass: "f(09+_=-=04-309Kkd9",
