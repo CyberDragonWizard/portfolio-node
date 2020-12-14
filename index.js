@@ -1,55 +1,46 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const router = express.Router();
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 
 const app = express();
-
-const port = 4444;
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(cors());
+app.use(express.json());
+app.use("/", router);
+app.listen(5000, () => console.log("Server Running"));
 
-app.listen(port, () => {
-  console.log('We are live on port 4444');
-});
-
-
-app.get('/', (req, res) => {
-  res.send('Welcome to my api');
-})
-
-app.post('/api/v1', (req,res) => {
-  var data = req.body;
-
-var smtpTransport = nodemailer.createTransport({
-  service: 'Gmail',
-  port: 465,
+const contactEmail = nodemailer.createTransport({
+  host: "imap.gmail.com",
+  port: 993,
   auth: {
-    user: 'USERNAME',
-    pass: 'PASSWORD'
+    user: "briand.nester@gmail.com",
+    pass: "f(09+_=-=04-309Kkd9",
+  },
+});
+
+contactEmail.verify((error) => {
+  if (error) {
+    console.log("error");
+  } else {
+    console.log("Ready to Send");
   }
 });
 
-var mailOptions = {
-  from: data.email,
-  to: 'briand.nester@gmail.com',
-  subject: 'Portfolio Message',
-  html: `<p>${data.name}</p>
-          <p>${data.email}</p>
-          <p>${data.message}</p>`
-};
-
-smtpTransport.sendMail(mailOptions,
-(error, response) => {
-  if(error) {
-    res.send(error)
-  }else {
-    res.send('Success')
-  }
-  smtpTransport.close();
+router.post("/contact", (req, res) => {
+  const name = req.body.name;
+  const email = req.body.email;
+  const message = req.body.message; 
+  const mail = {
+    from: name,
+    to: "briand.nester@gmail.com",
+    subject: "Contact Form Message",
+    html: `<p>Name: ${name}</p><p>Email: ${email}</p><p>Message: ${message}</p>`,
+  };
+  contactEmail.sendMail(mail, (error) => {
+    if (error) {
+      res.json({ status: "failed" });
+    } else {
+      res.json({ status: "sent" });
+    }
+  });
 });
-
-})
