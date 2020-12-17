@@ -15,7 +15,7 @@ const contactEmail = nodemailer.createTransport({
   port: 465,
   auth: {
     user: "briand.nester@gmail.com",
-    pass: "f(09+_=-=04-309Kkd9",
+    pass: "'<D>zAo3pFp:",
   },
 });
 
