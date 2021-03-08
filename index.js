@@ -19,8 +19,8 @@ const corsOptions ={
 
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({extended: true}));
-// app.use(express.json());
-app.use("/", router);
+app.use(express.json());
+// app.use("/", router);
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
 
 router.use("/", (req, res) => {
