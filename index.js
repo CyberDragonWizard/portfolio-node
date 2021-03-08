@@ -16,6 +16,14 @@ app.use(express.json());
 app.use("/", router);
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
 
+app.use(function (req, res, next) {
+  //Enabling CORS
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
+    next();
+  });
+
 const contactEmail = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
