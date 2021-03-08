@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
-const cors = require('cors');
 require("dotenv").config({ path: "/.env"});
 
 const GMAIL_USER = process.env.GMAIL_USER
@@ -11,18 +10,9 @@ const GMAIL_PASSWORD = process.env.GMAIL_PASS
 const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}))
-app.use(cors());
 app.use(express.json());
 app.use("/", router);
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
-
-app.use(function (req, res, next) {
-  //Enabling CORS
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
-    next();
-  });
 
 const contactEmail = nodemailer.createTransport({
   host: "smtp.gmail.com",
