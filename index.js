@@ -5,6 +5,7 @@ const cors = require('cors');
 require("dotenv").config({ path: "/.env"});
 
 const GMAIL_USER = process.env.GMAIL_USER
+
 const GMAIL_PASSWORD = process.env.GMAIL_PASS
 
 const PORT = process.env.PORT || 3000;
