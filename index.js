@@ -4,6 +4,8 @@ const nodemailer = require('nodemailer');
 const cors = require('cors');
 require("dotenv").config({ path: "/.env"});
 
+header('Access-Control-Allow-Origin: https://www.briannester.com/');
+
 const GMAIL_USER = process.env.GMAIL_USER
 
 const GMAIL_PASSWORD = process.env.GMAIL_PASS
