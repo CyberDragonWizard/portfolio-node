@@ -1,17 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 require("dotenv").config({ path: "/.env"});
 
-header('Access-Control-Allow-Origin: https://www.briannester.com/');
-
 const GMAIL_USER = process.env.GMAIL_USER
-
 const GMAIL_PASSWORD = process.env.GMAIL_PASS
 
 const PORT = process.env.PORT || 3000;
 const app = express();
+app.use(bodyParser.urlencoded({extended: true}))
 app.use(cors());
 app.use(express.json());
 app.use("/", router);
