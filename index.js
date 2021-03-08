@@ -10,8 +10,14 @@ const GMAIL_PASSWORD = process.env.GMAIL_PASS
 
 const PORT = process.env.PORT || 3000;
 const app = express();
-app.use(bodyParser.urlencoded({extended: true}))
-app.use(cors());
+
+const corsOptions ={
+  origin:'https://briannester.com', 
+  credentials:true,            
+  optionSuccessStatus:200
+};
+app.use(cors(corsOptions));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());
 app.use("/", router);
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
