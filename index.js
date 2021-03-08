@@ -18,6 +18,7 @@ app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
 const contactEmail = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
+  secure: true,
   auth: {
     user: GMAIL_USER,
     pass: GMAIL_PASSWORD,
@@ -38,7 +39,7 @@ router.post("/contact", (req, res) => {
   const message = req.body.message; 
   const mail = {
     from: name,
-    to: "briand.nester@gmail.com",
+    to: GMAIL_USER,
     subject: "Contact Form Message",
     html: `<p>Name: ${name}</p><p>Email: ${email}</p><p>Message: ${message}</p>`,
   };
