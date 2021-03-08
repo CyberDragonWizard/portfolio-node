@@ -4,6 +4,9 @@ const nodemailer = require('nodemailer');
 const cors = require('cors');
 require("dotenv").config({ path: "/.env"});
 
+const GMAIL_USER = process.env.GMAIL_USER
+const GMAIL_PASSWORD = process.env.GMAIL_PASS
+
 const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(cors());
@@ -15,8 +18,8 @@ const contactEmail = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
   auth: {
-    user: process.env.USER,
-    pass: process.env.PASSWORD,
+    user: GMAIL_USER,
+    pass: GMAIL_PASSWORD,
   },
 });
 
